@@ -1,0 +1,12 @@
+# Local tooling
+.claude/
+
+# OS / editor
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/
+
+# Full-size source art — the site serves the optimized copies in Assets/web/
+Assets/GumballHeroPromoBg.png
+Assets/Three_Coins_logo_transparent_background.png
