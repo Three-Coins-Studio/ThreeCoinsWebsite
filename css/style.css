@@ -144,24 +144,23 @@ html[data-scrolled] .socials {
 
 .socials {
   position: fixed; z-index: 60;
-  top: clamp(14px, 2vw, 24px); right: calc(var(--m) + var(--navw));
+  top: clamp(14px, 2vw, 24px); right: calc(var(--m) + var(--navw) - 8px);
   height: 30px; display: flex; align-items: center;
   color: var(--w);
   transition: opacity .35s;
 }
-.socials ul { display: flex; gap: clamp(14px, 1.9vw, 28px); }
+.socials ul { display: flex; gap: 2px; }
 .socials a {
-  position: relative; display: block; padding: 6px 0;
-  font-size: 12px; font-weight: 600; line-height: 1; letter-spacing: .12em; text-transform: uppercase;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, .5);
+  display: grid; place-items: center;
+  width: 36px; height: 36px;
+  transition: color .25s, transform .4s var(--ease);
 }
-.socials a::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
-  background: var(--y);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform .4s var(--ease);
+.socials svg {
+  width: 20px; height: 20px; fill: currentColor;
+  filter: drop-shadow(0 1px 6px rgba(0, 0, 0, .5));
 }
-.socials a:hover::after, .socials a:focus-visible::after { transform: scaleX(1); }
+.socials a:hover, .socials a:focus-visible { color: var(--y); transform: translateY(-2px); }
+.socials a:focus-visible { outline-offset: -4px; }
 
 .dots {
   position: fixed; z-index: 60;
@@ -484,9 +483,9 @@ html[data-scrolled] .socials {
   .brand b { font-size: 14px; }
   .brand img { height: 26px; }
   .hero { padding-top: 88px; } /* black header strip for the brand + socials */
-  .socials { top: 54px; left: var(--m); right: auto; height: auto; }
-  .socials ul { flex-wrap: wrap; gap: 4px 16px; }
-  .socials a { font-size: 11px; letter-spacing: .1em; }
+  .socials { top: 46px; left: calc(var(--m) - 8px); right: auto; height: auto; }
+  .socials a { width: 34px; height: 34px; }
+  .socials svg { width: 18px; height: 18px; }
   .dots a { width: 24px; height: 24px; }
   .dots a::before { width: 8px; height: 8px; }
   .dots a::after { display: none; }
