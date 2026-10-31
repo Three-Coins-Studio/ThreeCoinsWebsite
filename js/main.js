@@ -64,20 +64,21 @@
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lb-img');
   const lbCount = document.getElementById('lb-count');
-  const shots = [...document.querySelectorAll('.shot img')];
+  const shotButtons = [...document.querySelectorAll('[data-shot]')];
+  const shots = shotButtons.map((btn) => btn.querySelector('img'));
   let open = 0;
 
   const pad = (n) => String(n).padStart(2, '0');
   const show = (i) => {
     open = (i + shots.length) % shots.length;
-    lbImg.src = shots[open].currentSrc || shots[open].src;
+    lbImg.src = shots[open].dataset.full;
     lbImg.alt = shots[open].alt;
     lbCount.textContent = `${pad(open + 1)} / ${pad(shots.length)}`;
   };
 
-  document.querySelectorAll('.shot button').forEach((btn) => {
+  shotButtons.forEach((btn, i) => {
     btn.addEventListener('click', () => {
-      show(Number(btn.dataset.index));
+      show(i);
       lb.showModal();
     });
   });
@@ -89,4 +90,24 @@
     if (e.key === 'ArrowLeft') show(open - 1);
     if (e.key === 'ArrowRight') show(open + 1);
   });
+
+  /* ---- Trailer: YouTube only loads once someone asks to watch ---- */
+  const trailer = document.getElementById('trailer-dialog');
+  const trailerFrame = document.getElementById('trailer-frame');
+
+  document.querySelectorAll('[data-trailer]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube-nocookie.com/embed/Dqm0rQ6fxek?autoplay=1&rel=0';
+      iframe.title = 'Gumball Hero official trailer';
+      iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      trailerFrame.replaceChildren(iframe);
+      trailer.showModal();
+    });
+  });
+  document.getElementById('trailer-close').addEventListener('click', () => trailer.close());
+  trailer.addEventListener('click', (e) => { if (e.target === trailer) trailer.close(); });
+  trailer.addEventListener('close', () => trailerFrame.replaceChildren()); // stops playback
 })();

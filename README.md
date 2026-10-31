@@ -18,8 +18,9 @@ Then open http://localhost:5173.
 | `index.html` | The page |
 | `css/style.css` | Styles (palette: white, black, `#fde50f`) |
 | `js/main.js` | Scroll focus animation, dot navigation, lightbox |
-| `Assets/web/` | Web-optimized images (hero art, logo, favicons) |
-| `Assets/GumballHeroScreenshot/` | Gameplay screenshots |
+| `Assets/web/` | Web-optimized images the site serves (hero art, screenshots, logo, share image, favicons) |
+| `404.html`, `robots.txt`, `sitemap.xml` | Error page and search-engine files |
+| `Assets/GumballHeroScreenshot/` | Original 800px screenshots (not deployed) |
 
 The full-size promo art and original logo are kept out of git (see `.gitignore`);
 `Assets/web/` holds the optimized versions the site actually uses.

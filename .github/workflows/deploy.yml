@@ -24,9 +24,9 @@ jobs:
       - name: Assemble site
         run: |
           mkdir -p _site/Assets
-          cp index.html _site/
+          cp index.html 404.html robots.txt sitemap.xml _site/
           cp -r css js _site/
-          cp -r Assets/web Assets/GumballHeroScreenshot Assets/GumballHeroIcon.png _site/Assets/
+          cp -r Assets/web _site/Assets/
 
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
