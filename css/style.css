@@ -149,18 +149,18 @@ html[data-scrolled] .socials {
   color: var(--w);
   transition: opacity .35s;
 }
-.socials ul { display: flex; gap: 2px; }
-.socials a {
+/* Icon row, shared by the hero socials and the footer */
+.socials ul, .foot-socials ul { display: flex; gap: 2px; }
+.socials a, .foot-socials a {
   display: grid; place-items: center;
   width: 36px; height: 36px;
   transition: color .25s, transform .4s var(--ease);
 }
-.socials svg {
-  width: 20px; height: 20px; fill: currentColor;
-  filter: drop-shadow(0 1px 6px rgba(0, 0, 0, .5));
-}
-.socials a:hover, .socials a:focus-visible { color: var(--y); transform: translateY(-2px); }
-.socials a:focus-visible { outline-offset: -4px; }
+.socials svg, .foot-socials svg { width: 20px; height: 20px; fill: currentColor; }
+.socials svg { filter: drop-shadow(0 1px 6px rgba(0, 0, 0, .5)); }
+.socials a:hover, .socials a:focus-visible,
+.foot-socials a:hover, .foot-socials a:focus-visible { color: var(--y); transform: translateY(-2px); }
+.socials a:focus-visible, .foot-socials a:focus-visible { outline-offset: -4px; }
 
 .dots {
   position: fixed; z-index: 60;
@@ -224,7 +224,7 @@ html[data-scrolled] .socials {
 .dark  .btn { --sweep: var(--w); }
 .arr { width: 15px; height: 15px; flex: none; transition: transform .35s var(--ease); }
 .play { width: 13px; height: 13px; flex: none; fill: currentColor; }
-.btn:hover .arr, .links a:hover .arr, .foot a:hover .arr { transform: translate(3px, -3px); }
+.btn:hover .arr, .foot a:hover .arr { transform: translate(3px, -3px); }
 
 .btn-ghost {
   --sweep: var(--y);
@@ -408,41 +408,22 @@ html[data-scrolled] .socials {
   font-size: clamp(30px, 3.2vw, 54px); line-height: 1; letter-spacing: -.028em;
 }
 
-/* ---------- 06 Follow ---------- */
-
-.follow-title { font-size: clamp(56px, 8.4vw, 150px); }
-.links {
-  margin-top: clamp(22px, 4vh, 44px);
-  border-bottom: 1.5px solid var(--fg);
-}
-.links li { border-top: 1.5px solid var(--fg); }
-.links a {
-  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--gap); align-items: center;
-  padding: clamp(8px, 1.4vh, 16px) 0;
-  transition: background-color .25s, padding .45s var(--ease);
-}
-.links .i      { grid-column: 1 / 2; }
-.links .name {
-  grid-column: 2 / 8;
-  font-weight: 800;
-  font-size: clamp(34px, 5vw, 84px); line-height: 1.04; letter-spacing: -.032em;
-}
-.links .handle { grid-column: 8 / 12; text-transform: none; font-size: 13px; }
-.links .go     { grid-column: 12 / 13; justify-self: end; width: clamp(18px, 2vw, 30px); height: clamp(18px, 2vw, 30px); }
-.links a:hover, .links a:focus-visible {
-  background: var(--y); color: #0a0a0a; padding-inline: 14px;
-  outline-offset: -2px;
-}
+/* ---------- Footer ---------- */
 
 .foot {
-  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 24px;
-  margin-top: auto; padding-top: 28px;
+  padding: 0 calc(var(--m) + var(--navw)) 22px var(--m);
+  background: var(--bg); color: var(--fg);
+  scroll-snap-align: end; /* so the page can rest on the footer instead of snapping back to the studio */
+}
+.foot-in {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px 24px;
+  border-top: 1.5px solid var(--fg);
+  padding-top: 18px;
 }
 .foot-id { display: inline-flex; align-items: center; gap: 10px; }
 .foot-id img { width: 34px; height: auto; }
-.foot-links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
-.foot a { display: inline-flex; align-items: center; gap: 8px; border-bottom: 1.5px solid currentColor; }
+.foot-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px 24px; }
+.foot-links a { display: inline-flex; align-items: center; gap: 8px; border-bottom: 1.5px solid currentColor; }
 .foot .arr { width: 12px; height: 12px; }
 
 /* ---------- Scroll focus: fade in / out ---------- */
@@ -540,10 +521,9 @@ html[data-scrolled] .socials {
   .team .coin { margin-bottom: 0; width: 96px; font-size: 44px; grid-row: span 2; }
   .team h3, .team p { flex: 1 1 calc(100% - 120px); }
 
-  .links .i { grid-column: 1 / 3; }
-  .links .name { grid-column: 3 / 12; }
-  .links .handle { grid-column: 3 / 12; grid-row: 2; }
-  .links .go { grid-column: 12 / 13; grid-row: 1 / span 2; margin-right: 8px; } /* clear of the active dot */
+  .foot-in { grid-template-columns: 1fr; justify-items: start; }
+  .foot-socials { margin-left: -8px; } /* icon glyphs line up with the text edge */
+  .foot-links { justify-content: flex-start; }
 }
 
 @media (max-width: 520px) {
